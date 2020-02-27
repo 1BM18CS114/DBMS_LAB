@@ -1,0 +1,72 @@
+create table Student(
+    snum integer,
+    sname varchar(30),
+    major varchar(30),
+    lvl varchar(30),
+    age integer, primary key(snum));
+
+create table Faculty(
+    fid integer,
+    fname varchar(30),
+    deptid integer,
+    primary key(fid));
+
+create table Class(
+    cname varchar(30),
+    meetat timestamp,
+    room varchar(30),
+    fid integer,
+    primary key(cname),
+    foreign key(fid) references Faculty(fid));
+
+
+create table Enrolled(
+    snum integer,
+    cname varchar(30),
+    primary key(snum),
+    foreign key(snum) references Student(snum),
+    foreign key(cname) references Class(cname));
+
+
+
+insert into Student values(001, 'Suraj', 'CSE', 'SO', 21);
+insert into Student values(002, 'Meeme', 'CSE', 'SO', 19);
+insert into Student values(003, 'Sumanth', 'IS', 'FR', 19);
+insert into Student values(004, 'Nidhe', 'ECE', 'SR', 21);
+
+
+
+select * from Student;
+
+
+
+insert into Faculty values(101, 'Namratha', 1);
+insert into Faculty values(&fid, '&fname', &depid);
+
+
+insert into Class values('&cname', '&meetat', '&room', &fid);
+
+select * from Class;
+
+
+
+insert into Enrolled values(&snum, '&cname');
+
+select * from Enrolled;
+
+delete from Enrolled where snum = 4;
+
+
+--i. Find the names of all Juniors (level = JR) who are enrolled in a class taught by
+select * from Student, Faculty, Enrolled where lvl = 'SR' and fname = 'Namratha';
+
+ii. Find the names of all classes that either meet in room R128 or have five or more Students enrolled.
+iii. Find the names of all students who are enrolled in two classes that meet at the same time.
+iv. Find the names of faculty members who teach in every room in which some class is taught.
+v. Find the names of faculty members for whom the combined enrollment of the courses that they teach is less than five.
+vi. Find the names of students who are not enrolled in any class.
+vii. For each age value that appears in Students, find the level value that appears most often.
+For example, if there are more FR level students aged 18 than SR, JR, or SO students aged 18, you should print the pair (18, FR).
+
+    
+    
